@@ -15,6 +15,19 @@ app = typer.Typer(help="finn.no Torget — second-hand general marketplace.")
 console = Console()
 err = Console(stderr=True)
 
+# ── ads sub-group ─────────────────────────────────────────────────────────────
+_ads_app = typer.Typer(help="Administrer egne Torget-annonser.")
+app.add_typer(_ads_app, name="ads")
+
+
+@_ads_app.command("list")
+def torget_ads_list(
+    plain: Annotated[bool, typer.Option("--plain", help="Enkel tekstutskrift")] = False,
+) -> None:
+    """List egne annonser på Torget."""
+    from .ads import ads_list
+    ads_list(marketplace="torget", plain=plain)
+
 SORT_HELP = (
     "Sort order. Options: newest (default), oldest, relevance, "
     "price-asc, price-desc, distance. "

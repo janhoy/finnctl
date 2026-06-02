@@ -2,6 +2,8 @@
 
 A command-line tool for interacting with [finn.no](https://www.finn.no), Norway's largest classifieds marketplace.
 
+Licensed under the [Apache License, Version 2.0](LICENSE.txt).
+
 ## Features
 
 - **torget search** — Search the general Torget marketplace
