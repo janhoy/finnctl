@@ -2,7 +2,6 @@
 
 from ..client import Coordinates, FinnClient, SearchAd, SearchResult
 
-
 SEARCH_PATH = "/recommerce/forsale/search"
 
 # Map user-friendly sort names to finn.no API values.

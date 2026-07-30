@@ -276,4 +276,4 @@ def whoami() -> None:
     console.print(f"Email:   {session.email or '–'}")
     console.print(f"LoginId: {session.login_id or '–'}")
     console.print(f"SpidId:  {session.spid_id or '–'}")
-    console.print(f"Session: [green]active[/green] (cookie-based)")
+    console.print("Session: [green]active[/green] (cookie-based)")

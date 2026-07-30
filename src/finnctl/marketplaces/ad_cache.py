@@ -15,12 +15,11 @@ from __future__ import annotations
 
 import json
 import shutil
-from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
-
 
 CACHE_DIR = Path.home() / ".finnctl" / "cache"
 IMAGE_CDN = "https://images.finncdn.no/dynamic/1280w/"
@@ -130,7 +129,7 @@ class AdCache:
             "name": folder_name,
             "title": title,
             "marketplace": marketplace,
-            "cached_at": datetime.now(timezone.utc).isoformat(),
+            "cached_at": datetime.now(UTC).isoformat(),
             "image_count": len(image_uris),
         }
         (folder / "meta.json").write_text(

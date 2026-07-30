@@ -23,5 +23,23 @@ cli = [
 [project.scripts]
 finnctl = "finnctl.main:app"
 
+[dependency-groups]
+dev = [
+    "ruff>=0.6",
+    "pytest>=8.0",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/finnctl"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# E/W = pycodestyle, F = pyflakes, I = import sorting, UP = pyupgrade
+select = ["E", "W", "F", "I", "UP"]
+# Long lines are common in help text and comments; don't fail on them.
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
