@@ -24,6 +24,7 @@ from .client import Coordinates, FinnClient, SearchAd, SearchResult
 from .marketplaces.ad_cache import AdCache, CachedAd
 from .marketplaces.ad_get import fetch_ad_payload, image_uris
 from .marketplaces.ad_put import pause_ad, push_ad
+from .marketplaces.lettings import LettingsClient, RentalAd, RentalSearchResult
 from .marketplaces.my_items import MyItemsClient, fetch_ad_state
 from .marketplaces.realestate import HomeAd, HomeSearchResult, RealestateClient
 from .marketplaces.torget import TorgetClient
@@ -34,6 +35,9 @@ __all__ = [
     "RealestateClient",
     "HomeAd",
     "HomeSearchResult",
+    "LettingsClient",
+    "RentalAd",
+    "RentalSearchResult",
     "MyItemsClient",
     "AdCache",
     "CachedAd",

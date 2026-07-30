@@ -8,6 +8,7 @@ Licensed under the [Apache License, Version 2.0](LICENSE.txt).
 
 - **torget search** — Search the general Torget marketplace
 - **realestate search** — Search *Bolig til salgs* (homes for sale) with filters
+- **lettings search** — Search *Bolig til leie* (homes for rent) with filters
 
 More features are planned: managing your own active ads, viewing received messages, tracking saved searches, and support for additional marketplaces (bil, etc.).
 
@@ -115,4 +116,55 @@ with FinnClient() as finn:
     )
     for ad in result.ads:
         print(ad.price, ad.location, ad.title)
+```
+
+### lettings search
+
+Search *Bolig til leie* (homes for rent). Same filters as homes-for-sale minus
+ownership form (rentals have none): keywords, monthly rent, property type,
+number of bedrooms, living area, and location. Prices are the **monthly rent**.
+Also available under its Norwegian alias `leie`.
+
+```sh
+finnctl lettings search --type leilighet --bedrooms-min 2 --location Oslo --price-max 25000
+finnctl lettings search --type hybel --location Oslo --sort price-asc
+finnctl leie search hage --type enebolig --location Bergen --json
+```
+
+**Options:**
+
+| Option | Short | Default | Description |
+|--------|-------|---------|-------------|
+| `--price-min` | | | Minimum monthly rent (NOK) |
+| `--price-max` | | | Maximum monthly rent (NOK) |
+| `--type` | `-t` | | Property type (repeatable) |
+| `--bedrooms-min` | `-b` | | Minimum number of bedrooms |
+| `--area-min` | | | Minimum living area (m²) |
+| `--location` | `-l` | | Location code or county name |
+| `--sort` | `-s` | `newest` | Sort order |
+| `--limit` | `-n` | 20 | Number of results to show |
+| `--page` | `-p` | 1 | Page number |
+| `--json` | | false | Output structured JSON |
+| `--plain` | | false | Plain text output (pipe-friendly) |
+
+**Property types:** `leilighet`, `enebolig` (alias `hus`), `tomannsbolig`, `rekkehus`, `hybel`, `bofellesskap` (room in a shared flat), `hytte`, `garasje`, `andre`
+
+**Sort values:** `newest`, `price-asc`, `price-desc`, `area-asc`, `area-desc`, `relevance` (price = monthly rent)
+
+**Location** works exactly as for homes-for-sale (county name or hierarchical finn.no code).
+
+**Structured output:** `--json` emits `{ "total", "page", "ads": [...] }` where each ad
+includes `id`, `title`, `url`, `rent`, `location`, `area_m2`, `bedrooms`, and
+`property_type`. The library API returns the same via `LettingsClient`:
+
+```python
+from finnctl import FinnClient
+from finnctl.marketplaces.lettings import LettingsClient
+
+with FinnClient() as finn:
+    result = LettingsClient(finn).search(
+        property_types=["leilighet"], bedrooms_min=2, price_max=25_000, location="Oslo"
+    )
+    for ad in result.ads:
+        print(ad.rent, ad.location, ad.title)
 ```

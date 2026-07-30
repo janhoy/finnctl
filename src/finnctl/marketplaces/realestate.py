@@ -137,7 +137,7 @@ class RealestateClient:
         if area_min is not None:
             params["area_from"] = area_min
         if location:
-            params["location"] = self._resolve_location(location)
+            params["location"] = resolve_location_code(location)
 
         if property_types:
             params["property_type"] = [resolve_property_type(t) for t in property_types]
@@ -156,21 +156,22 @@ class RealestateClient:
 
         return HomeSearchResult(ads=ads, total=_extract_total(soup), page=page)
 
-    @staticmethod
-    def _resolve_location(location: str) -> str:
-        """Accept a raw finn.no location code as-is, or map a known Norwegian
-        county name to its code.
 
-        Location codes are hierarchical, and the leading digit is the depth:
-        ``0.`` = fylke (county), ``1.`` = kommune, ``2.`` = bydel/område.
-        E.g. ``0.20007`` = Buskerud, ``2.20007.20110.23007`` = Buskerud >
-        Drammen > Nedre Eiker. County-level codes are the same ``0.20xxx``
-        values used elsewhere in finnctl."""
-        loc = location.strip()
-        if re.fullmatch(r"\d+(\.\d+)*", loc):
-            return loc
-        from ..client import LOCATION_CODES
-        return LOCATION_CODES.get(loc.lower(), loc)  # pass unknown through
+def resolve_location_code(location: str) -> str:
+    """Accept a raw finn.no location code as-is, or map a known Norwegian
+    county name to its code.
+
+    Location codes are hierarchical, and the leading digit is the depth:
+    ``0.`` = fylke (county), ``1.`` = kommune, ``2.`` = bydel/område.
+    E.g. ``0.20007`` = Buskerud, ``2.20007.20110.23007`` = Buskerud >
+    Drammen > Nedre Eiker. County-level codes are the same ``0.20xxx``
+    values used across finnctl (homes and lettings share this scheme).
+    """
+    loc = location.strip()
+    if re.fullmatch(r"\d+(\.\d+)*", loc):
+        return loc
+    from ..client import LOCATION_CODES
+    return LOCATION_CODES.get(loc.lower(), loc)  # pass unknown through
 
 
 def resolve_property_type(name: str) -> int:

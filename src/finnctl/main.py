@@ -4,6 +4,7 @@ import typer
 
 from .commands import ads as ads_cmd
 from .commands import auth as auth_cmd
+from .commands import lettings as lettings_cmd
 from .commands import realestate as realestate_cmd
 from .commands import torget as torget_cmd
 
@@ -16,6 +17,8 @@ app = typer.Typer(
 app.add_typer(torget_cmd.app, name="torget")
 app.add_typer(realestate_cmd.app, name="realestate")
 app.add_typer(realestate_cmd.app, name="eiendom")  # Norwegian alias
+app.add_typer(lettings_cmd.app, name="lettings")
+app.add_typer(lettings_cmd.app, name="leie")  # Norwegian alias
 app.add_typer(ads_cmd.app, name="ads")
 app.add_typer(auth_cmd.app, name="auth")
 
