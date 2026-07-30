@@ -22,6 +22,7 @@ Library usage::
 from .auth import Session, load_session, save_session, clear_session, require_session
 from .client import FinnClient, SearchAd, SearchResult, Coordinates
 from .marketplaces.torget import TorgetClient
+from .marketplaces.realestate import RealestateClient, HomeAd, HomeSearchResult
 from .marketplaces.my_items import MyItemsClient
 from .marketplaces.ad_cache import AdCache, CachedAd
 from .marketplaces.ad_get import fetch_ad_payload, image_uris
@@ -31,6 +32,9 @@ from .marketplaces.my_items import fetch_ad_state
 __all__ = [
     "FinnClient",
     "TorgetClient",
+    "RealestateClient",
+    "HomeAd",
+    "HomeSearchResult",
     "MyItemsClient",
     "AdCache",
     "CachedAd",
