@@ -10,7 +10,7 @@ from ..client import FinnClient
 from ..marketplaces.ad_cache import AdCache
 from ..marketplaces.ad_get import fetch_ad_payload, image_uris, marketplace_from_payload
 from ..marketplaces.ad_put import pause_ad, push_ad
-from ..marketplaces.my_items import MyItemsClient, STATE_MAP, fetch_ad_state
+from ..marketplaces.my_items import STATE_MAP, MyItemsClient, fetch_ad_state
 
 app = typer.Typer(help="Manage your finn.no ads.")
 console = Console()
@@ -224,7 +224,7 @@ def ads_put(
             err.print(f"[red]Failed to push ad:[/red] {e}")
             raise typer.Exit(1)
 
-    console.print(f"[green]Done.[/green] Open to review and publish:")
+    console.print("[green]Done.[/green] Open to review and publish:")
     console.print(f"  {edit_url}")
 
 
@@ -285,7 +285,7 @@ def ads_republish(
                 _republish_via_upload(finn, session, finn_id, id_or_name, name, price)
             else:
                 console.print(f"Ad {finn_id} is expired — no re-upload needed.")
-                console.print(f"[green]Open to review and publish:[/green]")
+                console.print("[green]Open to review and publish:[/green]")
                 console.print(f"  {edit_url}")
 
         elif state == "ACTIVE":
@@ -347,5 +347,5 @@ def _republish_via_upload(
         err.print(f"[red]Failed to push ad:[/red] {e}")
         raise typer.Exit(1)
 
-    console.print(f"[green]Done.[/green] Open to review and publish:")
+    console.print("[green]Done.[/green] Open to review and publish:")
     console.print(f"  {edit_url}")

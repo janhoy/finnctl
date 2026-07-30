@@ -8,7 +8,6 @@ from typing import Any
 import httpx
 from bs4 import BeautifulSoup
 
-
 BASE_URL = "https://www.finn.no"
 
 HEADERS = {

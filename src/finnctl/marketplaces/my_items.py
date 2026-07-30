@@ -13,7 +13,6 @@ from dataclasses import dataclass, field
 from ..auth import Session
 from ..client import FinnClient
 
-
 MY_ITEMS_API = "/my-items/api/summary"
 
 # Maps human-readable CLI state names → finn.no API facet values.

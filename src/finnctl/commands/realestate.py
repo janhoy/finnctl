@@ -4,9 +4,9 @@ import json as jsonlib
 from typing import Annotated
 
 import typer
+from rich import box
 from rich.console import Console
 from rich.table import Table
-from rich import box
 from rich.text import Text
 
 from ..client import FinnClient

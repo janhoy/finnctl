@@ -13,7 +13,6 @@ from dataclasses import asdict, dataclass, field
 
 from ..client import BASE_URL, FinnClient
 
-
 SEARCH_PATH = "/realestate/homes/search.html"
 
 # finn.no's "Antall soverom" facet offers 1–5, where 5 means "5 or more".

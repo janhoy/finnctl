@@ -14,7 +14,6 @@ import re
 from ..auth import Session
 from ..client import FinnClient
 
-
 EDIT_BASE = "/recommerce/create"
 
 

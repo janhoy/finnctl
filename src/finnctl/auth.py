@@ -13,7 +13,6 @@ import os
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-
 SESSION_FILE = Path.home() / ".finnctl" / "session.json"
 
 FINN_LOGIN_URL = "https://www.finn.no/auth/login"
